@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="appointment_option_search">
+            <field name="model">s2u.appointment.registration</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="descripcion"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="appointment_option_form_view">
+            <field name="model">s2u.appointment.registration</field>
+            <field name="arch" type="xml">
+                <div>
+                    <group>
+                        <button class="btn btn-danger" type="object" name="cancel_appointment" string="Cancelar"/>
+                    </group>
+                    <group>
+                        <button class="btn btn-success" type="object" name="confirm_appointment" string="Confirmar"/>
+                    </group>
+                </div>
+                <form string="Registros">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="descripcion"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="appointment_option_tree_view">
+            <field name="model">s2u.appointment.registration</field>
+            <field name="arch" type="xml">
+                <tree string="Appointment registros">
+                    <field name="name"/>
+                    <field name="descripcion"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="appointment_reg_action">
+            <field name="name">Appointment Registros</field>
+            <field name="res_model">s2u.appointment.registration</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Appointment Registros" id="menu_appointment_reg"
+                  parent="menu_appointment"  action="appointment_reg_action" sequence="30"/>
+
+    </data>
+</odoo>

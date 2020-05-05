@@ -71,7 +71,7 @@ class CustomerPortal(CustomerPortal):
         )
 
         # content according to pager and archive selected
-        appointments = request.env['s2u.appointment.registration'].search(domain, order=order, limit=self._items_per_page, offset=pager['offset'])
+        appointments = request.env['s2u.appointment.registration'].search([('state', '=', 'valid')], order=order, limit=self._items_per_page, offset=pager['offset'])
         request.session['my_appointments_history'] = appointments.ids[:100]
 
         values.update({

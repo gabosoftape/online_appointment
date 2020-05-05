@@ -116,7 +116,7 @@
 
                                    <div class="form-group col-lg-12">
                                        <div>
-                                           <button class="btn btn-success">Agendar</button>
+                                           <button class="btn btn-success">Continuar agendamiento</button>
                                        </div>
                                    </div>
                                </div>
@@ -213,7 +213,16 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <p> aqui va el formulario de checkout personalizado</p>
+                                <form action="/shop/cart/update" method="POST">
+                                  <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                  <div class="js_product js_main_product">
+                                    <t t-placeholder="select">
+                                      <input type="hidden" class="product_id" name="product_id" value="2"/>
+                                      <input type="hidden" class="product_template_id" name="product_template_id" value="2"/>
+                                    </t>
+                                    <button class="btn btn-success"><i class="fa fa-calendar-check-o"/>Continuar proceso de agendamiento</button>
+                                  </div>
+                                </form>
                             </div>
                         </div>
                     </div>

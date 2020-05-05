@@ -41,6 +41,7 @@
         'views/menus.xml',
         'views/appointment_slot_view.xml',
         'views/appointment_option_view.xml',
+        'views/appointment_registration_view.xml',
     ],
     'qweb': [
     ],

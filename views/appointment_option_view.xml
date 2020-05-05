@@ -13,7 +13,7 @@
         <record model="ir.ui.view" id="appointment_option_form_view">
             <field name="model">s2u.appointment.option</field>
             <field name="arch" type="xml">
-                <form string="Appointment Option">
+                <form string="Opciones de citas">
                     <sheet>
                         <group>
                             <group>

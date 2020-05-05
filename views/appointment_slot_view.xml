@@ -43,7 +43,7 @@
 
         
         <record model="ir.actions.act_window" id="appointment_slot_action">
-            <field name="name">Appointment Slots</field>
+            <field name="name">Ranuras de tiempo</field>
             <field name="res_model">s2u.appointment.slot</field>
             <field name="view_mode">tree,form</field>
         </record>

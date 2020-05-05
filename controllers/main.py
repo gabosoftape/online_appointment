@@ -231,29 +231,31 @@ class OnlineAppointment(http.Controller):
         # set detaching = True, we do not want to send a mail to the attendees
         #aqui se crea el nuevo evento en calendario mkon.
         now = datetime.now()
-        appointment = request.env['calendar.event'].sudo().with_context(detaching=False).create({
-            'name': "Nueva cita medica creada",
-            'description': post.get('remarks', ''),
-            'start': now.strftime("%Y-%m-%d %H:%M:%S"),
-            'stop': (now + timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S"),
-            'user_id': request.env.user.id,
-        })
+#        appointment = request.env['calendar.event'].sudo().with_context(detaching=False).create({
+#            'name': "Nueva cita medica creada",
+#            'description': post.get('remarks', ''),
+#            'start': now.strftime("%Y-%m-%d %H:%M:%S"),
+#            'stop': (now + timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S"),
+#            'user_id': request.env.user.id,
+#        })
         # set all attendees on 'accepted'
-        appointment.attendee_ids.write({
-            'state': 'accepted'
-        })
+#        appointment.attendee_ids.write({
+#            'state': 'accepted'
+#        })
 
         # registered user, we want something to show in his portal
         if not request.env.user._is_public():
             vals = {
                 'partner_id': request.env.user.partner_id.id,
+                'descripcion': post.get('remarks', False),
+                'state': 'pending',
                 # 'appointee_id': self.appointee_id_to_partner_id(appointee_id),
-                'event_id': appointment.id
+                #'event_id': appointment.id
             }
             registration = request.env['s2u.appointment.registration'].create(vals)
             print(registration)
 
-        return request.redirect('/online-appointment/appointment-scheduled?appointment=%d' % appointment.id)
+        return request.redirect('/online-appointment/appointment-scheduled?appointment=%d' % registration.id)
 
     @http.route(['/online-appointment/appointment-scheduled'], auth="public", type='http', website=True)
     def confirmed(self, **post):
@@ -263,13 +265,14 @@ class OnlineAppointment(http.Controller):
             if not param or param.value.lower() != 'public':
                 return request.render('s2u_online_appointment.only_registered_users')
 
-        appointment = request.env['calendar.event'].sudo().search([('id', '=', int(post.get('appointment', 0)))])
-        if not appointment:
+        registro = request.env['s2u.appointment.registration'].sudo().search([('id', '=', int(post.get('appointment', 0)))])
+        if not registro:
             values = {
                 'appointment': False,
-                'error_message': [_('Appointment not found.')]
+                'error_message': [],
+                'registration_id': False,
             }
-            return request.render('s2u_online_appointment.thanks', values)
+            return request.render('s2u_online_appointment.pay', values)
 
         if request.env.user._is_public():
             values = {
@@ -278,7 +281,7 @@ class OnlineAppointment(http.Controller):
             }
             return request.render('s2u_online_appointment.thanks', values)
         else:
-            if request.env.user.partner_id.id not in appointment.partner_ids.ids:
+            if request.env.user.partner_id.id != registro.partner_id.id:
                 values = {
                     'appointment': False,
                     'error_message': [_('Appointment not found.')]
@@ -286,7 +289,7 @@ class OnlineAppointment(http.Controller):
                 return request.render('s2u_online_appointment.thanks', values)
 
             values = {
-                'appointment': appointment,
+                'appointment': registro,
                 'error_message': []
             }
             return request.render('s2u_online_appointment.pay', values)
