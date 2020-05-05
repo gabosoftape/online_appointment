@@ -31,9 +31,7 @@ class CustomerPortal(CustomerPortal):
     @http.route(['/my/online-appointments', '/my/online-appointments/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_appointments(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, **kw):
         values = self._prepare_portal_layout_values()
-        domain = ['|', ('partner_id', '=', request.env.user.partner_id.id),
-                       '&', ('appointee_id', '=', request.env.user.partner_id.id),
-                            ('appointee_interaction', '=', True)]
+        domain = [('partner_id', '=', request.env.user.partner_id.id)]
 
         searchbar_sortings = {
             'new': {'label': _('Newest'), 'order': 'id desc'},

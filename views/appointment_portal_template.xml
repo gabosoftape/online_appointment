@@ -3,8 +3,8 @@
     <template id="portal_layout" name="Portal layout: appointment menu entry" inherit_id="portal.portal_breadcrumbs" priority="40">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'appointment' or appointment" t-attf-class="breadcrumb-item #{'active ' if not appointment else ''}">
-                <a t-if="appointment" t-attf-href="/my/online-appointments?{{ keep_query() }}">Appointments</a>
-                <t t-else="">Appointments</t>
+                <a t-if="appointment" t-attf-href="/my/online-appointments?{{ keep_query() }}">Citas</a>
+                <t t-else="">Citas</t>
             </li>
             <li t-if="appointment" class="breadcrumb-item active">
                 <t t-esc="appointment.name"/>
@@ -27,11 +27,11 @@
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
             <t t-call="portal.portal_searchbar">
-                <t t-set="title">Appointments</t>
+                <t t-set="title">Citas</t>
             </t>
             <t t-if="not appointments">
                 <div class="alert alert-warning mt8" role="alert">
-                    There are no appointments.
+                    Las citas estan siendo preparadas, una vez se registre el pago se habilitara tu cita, con el doctor asignado
                 </div>
             </t>
             <t t-if="appointments" t-call="portal.portal_table">
