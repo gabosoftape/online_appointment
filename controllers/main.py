@@ -2,6 +2,7 @@
 
 import pytz
 import datetime
+from datetime import datetime, timedelta, time
 
 from odoo.addons.s2u_online_appointment.helpers import functions
 
@@ -26,7 +27,7 @@ class OnlineAppointment(http.Controller):
             if user.tz:
                 tz = user.tz
             else:
-                tz = 'Europe/Amsterdam'
+                tz = 'America/Bogota'
             local = pytz.timezone(tz)
             local_dt = local.localize(date_parsed, is_dst=None)
             return local_dt.astimezone(pytz.utc)
@@ -135,7 +136,7 @@ class OnlineAppointment(http.Controller):
                 values['appointment_option_id'] = options[0].id
         return values
 
-    @http.route(['/online-appointment'], auth='public', website=True, csrf=True)
+    @http.route(['/online-appointment'], auth='user', website=True, csrf=True)
     def online_appointment(self, **kw):
 
         if request.env.user._is_public():
@@ -158,80 +159,84 @@ class OnlineAppointment(http.Controller):
 
             if not post.get('name', False):
                 error['name'] = True
-                error_message.append(_('Please enter your name.'))
+                error_message.append(_('Por favor, escriba su nombre.'))
             if not post.get('email', False):
                 error['email'] = True
-                error_message.append(_('Please enter your email address.'))
+                error_message.append(_('Por favor, introduzca su dirección de correo electrónico.'))
             elif not functions.valid_email(post.get('email', '')):
                 error['email'] = True
-                error_message.append(_('Please enter a valid email address.'))
+                error_message.append(_('Por favor, introduce una dirección de correo electrónico válida.'))
             if not post.get('phone', False):
                 error['phone'] = True
-                error_message.append(_('Please enter your phonenumber.'))
-
-        try:
-            appointee_id = int(post.get('appointee_id', 0))
-        except:
-            appointee_id = 0
-        if not appointee_id:
-            error['appointee_id'] = True
-            error_message.append(_('Please select a valid appointee.'))
-
-        option = request.env['s2u.appointment.option'].sudo().search([('id', '=', int(post.get('appointment_option_id', 0)))])
-        if not option:
-            error['appointment_option_id'] = True
-            error_message.append(_('Please select a valid subject.'))
-
-        slot = request.env['s2u.appointment.slot'].sudo().search([('id', '=', int(post.get('timeslot_id', 0)))])
-        if not slot:
-            error['timeslot_id'] = True
-            error_message.append(_('Please select a valid timeslot.'))
-
-        try:
-            date_start = datetime.datetime.strptime(post['appointment_date'], '%d/%m/%Y').strftime('%Y-%m-%d')
-            day_slot = date_start + ' ' + functions.float_to_time(slot.slot)
-            start_datetime = self.ld_to_utc(day_slot, appointee_id)
-        except:
-            error['appointment_date'] = True
-            error_message.append(_('Please select a valid date.'))
+                error_message.append(_('Por favor, introduzca su número de teléfono.'))
+        # Remover validacion de tipo, doctor, fecha y hora.. porque no seran añadidos por el creador, sino por el blass
+        #try:
+        #    appointee_id = int(post.get('appointee_id', 0))
+        #except:
+        #    appointee_id = 0
+        # validacion no doctor
+        #if not appointee_id:
+        #    error['appointee_id'] = True
+        #    error_message.append(_('Por favor seleccione un Doctor válido.'))
+        # Obtengo las opciones previamente configuradas.
+        #option = request.env['s2u.appointment.option'].sudo().search([('id', '=', int(post.get('appointment_option_id', 0)))])
+        # Validacion si no tengo tipo configurado
+        #if not option:
+        #    error['appointment_option_id'] = True
+        #    error_message.append(_('Por favor seleccione un tipo válido.'))
+    # Busco horarios de trabajo en mi modelo.
+        # Validacion horario
+        #slot = request.env['s2u.appointment.slot'].sudo().search([('id', '=', int(post.get('timeslot_id', 0)))])
+        #if not slot:
+        #    error['timeslot_id'] = True
+        #    error_message.append(_('Seleccione un intervalo de tiempo válido.'))
+    # validacion completa de fecha vs horarios de trabajo
+        #try:
+        #    date_start = datetime.datetime.strptime(post['appointment_date'], '%d/%m/%Y').strftime('%Y-%m-%d')
+        #    day_slot = date_start + ' ' + functions.float_to_time(slot.slot)
+        #    start_datetime = self.ld_to_utc(day_slot, appointee_id)
+        #except:
+        #    error['appointment_date'] = True
+        #    error_message.append(_('Por favor seleccione una fecha valida.'))
 
         values = self.prepare_values(form_data=post)
         if error_message:
             values['error'] = error
             values['error_message'] = error_message
             return request.render('s2u_online_appointment.make_appointment', values)
-
-        if not self.check_slot_is_possible(option.id, post['appointment_date'], appointee_id, slot.id):
-            values['error'] = {'timeslot_id': True}
-            values['error_message'] = [_('Slot is already occupied, please choose another slot.')]
-            return request.render('s2u_online_appointment.make_appointment', values)
-
-        if request.env.user._is_public():
-            partner = request.env['res.partner'].sudo().search(['|', ('phone', 'ilike', values['phone']),
-                                                                     ('email', 'ilike', values['email'])])
-            if partner:
-                partner_ids = [self.appointee_id_to_partner_id(appointee_id),
-                               partner[0].id]
-            else:
-                partner = request.env['res.partner'].sudo().create({
-                    'name': values['name'],
-                    'phone': values['phone'],
-                    'email': values['email']
-                })
-                partner_ids = [self.appointee_id_to_partner_id(appointee_id),
-                               partner[0].id]
-        else:
-            partner_ids = [self.appointee_id_to_partner_id(appointee_id),
-                           request.env.user.partner_id.id]
+    # validacion completa en caso de que se seleccione una ranura ocupada
+        #if not self.check_slot_is_possible(option.id, post['appointment_date'], appointee_id, slot.id):
+        #   values['error'] = {'timeslot_id': True}
+        #    values['error_message'] = [_('La ranura de tiempo ya está ocupada, elija otra ranura.')]
+        #    return request.render('s2u_online_appointment.make_appointment', values)
+    # si el usuario no esta registrado lo registramos. por ahora que se registre, por loca
+        #if request.env.user._is_public():
+        #    partner = request.env['res.partner'].sudo().search(['|', ('phone', 'ilike', values['phone']),
+        #                                                             ('email', 'ilike', values['email'])])
+        #    if partner:
+        #        partner_ids = [self.appointee_id_to_partner_id(appointee_id),
+        #                       partner[0].id]
+        #    else:
+        #        partner = request.env['res.partner'].sudo().create({
+        #            'name': values['name'],
+        #            'phone': values['phone'],
+        #            'email': values['email']
+        #        })
+        #        partner_ids = [self.appointee_id_to_partner_id(appointee_id),
+        #                       partner[0].id]
+        #else:
+        #    partner_ids = [self.appointee_id_to_partner_id(appointee_id),
+        #                   request.env.user.partner_id.id]
 
         # set detaching = True, we do not want to send a mail to the attendees
-        appointment = request.env['calendar.event'].sudo().with_context(detaching=True).create({
-            'name': option.name,
+        #aqui se crea el nuevo evento en calendario mkon.
+        now = datetime.now()
+        appointment = request.env['calendar.event'].sudo().with_context(detaching=False).create({
+            'name': "Nueva cita medica creada",
             'description': post.get('remarks', ''),
-            'start': start_datetime.strftime("%Y-%m-%d %H:%M:%S"),
-            'stop': (start_datetime + datetime.timedelta(minutes=round(option.duration * 60))).strftime("%Y-%m-%d %H:%M:%S"),
-            'duration': option.duration,
-            'partner_ids': [(6, 0, partner_ids)]
+            'start': now.strftime("%Y-%m-%d %H:%M:%S"),
+            'stop': (now + timedelta(hours=2)).strftime("%Y-%m-%d %H:%M:%S"),
+            'user_id': request.env.user.id,
         })
         # set all attendees on 'accepted'
         appointment.attendee_ids.write({
@@ -242,10 +247,11 @@ class OnlineAppointment(http.Controller):
         if not request.env.user._is_public():
             vals = {
                 'partner_id': request.env.user.partner_id.id,
-                'appointee_id': self.appointee_id_to_partner_id(appointee_id),
+                # 'appointee_id': self.appointee_id_to_partner_id(appointee_id),
                 'event_id': appointment.id
             }
             registration = request.env['s2u.appointment.registration'].create(vals)
+            print(registration)
 
         return request.redirect('/online-appointment/appointment-scheduled?appointment=%d' % appointment.id)
 
@@ -283,7 +289,7 @@ class OnlineAppointment(http.Controller):
                 'appointment': appointment,
                 'error_message': []
             }
-            return request.render('s2u_online_appointment.thanks', values)
+            return request.render('s2u_online_appointment.pay', values)
 
     def recurrent_events_overlapping(self, appointee_id, event_start, event_stop):
         query = """
@@ -501,90 +507,11 @@ class OnlineAppointment(http.Controller):
                     days_with_free_slots[d['date']] = True
         return days_with_free_slots
 
-    @http.route('/online-appointment/timeslots', type='json', auth='public', website=True)
-    def free_timeslots(self, appointment_option, appointment_with, appointment_date, form_criteria, **kwargs):
 
-        if request.env.user._is_public():
-            param = request.env['ir.config_parameter'].sudo().search([('key', '=', 's2u_online_appointment')], limit=1)
-            if not param or param.value.lower() != 'public':
-                return {
-                    'timeslots': [],
-                    'days_with_free_slots': {},
-                    'focus_year': 0,
-                    'focus_month': 0,
-                }
 
-        try:
-            option_id = int(appointment_option)
-        except:
-            option_id = 0
-        try:
-            appointee_id = int(appointment_with)
-        except:
-            appointee_id = 0
-        try:
-            date_parsed = datetime.datetime.strptime(appointment_date, '%d/%m/%Y')
-        except:
-            date_parsed = datetime.date.today()
-
-        free_slots = self.get_free_appointment_slots_for_day(option_id, appointment_date, appointee_id, form_criteria)
-        days_with_free_slots = self.get_days_with_free_slots(option_id,
-                                                             appointee_id,
-                                                             date_parsed.year,
-                                                             date_parsed.month,
-                                                             form_criteria)
-        return {
-            'timeslots': free_slots,
-            'days_with_free_slots': days_with_free_slots,
-            'focus_year': date_parsed.year,
-            'focus_month': date_parsed.month,
-        }
-
-    @http.route('/online-appointment/month-bookable', type='json', auth='public', website=True)
-    def month_bookable(self, appointment_option, appointment_with, appointment_year, appointment_month, form_criteria, **kwargs):
-
-        if request.env.user._is_public():
-            param = request.env['ir.config_parameter'].sudo().search([('key', '=', 's2u_online_appointment')], limit=1)
-            if not param or param.value.lower() != 'public':
-                return {
-                    'days_with_free_slots': [],
-                    'focus_year': 0,
-                    'focus_month': 0,
-                }
-
-        try:
-            option_id = int(appointment_option)
-        except:
-            option_id = 0
-        try:
-            appointee_id = int(appointment_with)
-        except:
-            appointee_id = 0
-        try:
-            appointment_year = int(appointment_year)
-            appointment_month = int(appointment_month)
-        except:
-            appointment_year = 0
-            appointment_month = 0
-
-        if not appointment_year or not appointment_month:
-            appointment_year = datetime.date.today().year
-            appointment_month = datetime.date.today().month
-
-        days_with_free_slots = self.get_days_with_free_slots(option_id,
-                                                             appointee_id,
-                                                             appointment_year,
-                                                             appointment_month,
-                                                             form_criteria)
-
-        return {
-            'days_with_free_slots': days_with_free_slots,
-            'focus_year': appointment_year,
-            'focus_month': appointment_month,
-        }
 
     def online_appointment_state_change(self, appointment, previous_state):
-        # method to override when  you want something to happen on state change, for example send mail
+        # método para anular cuando desea que algo suceda en un cambio de estado, por ejemplo, enviar correo
         return True
 
     @http.route(['/online-appointment/portal/cancel'], auth="public", type='http', website=True)

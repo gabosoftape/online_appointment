@@ -83,7 +83,7 @@ odoo.define('s2u_online_appoinment.main', function (require) {
                 self.days_with_free_slots[self._get_yearmonth_key.bind(self)()] = result.days_with_free_slots;
                 var options = [];
                 var timeslots = result.timeslots;
-                options.push('<option value="">-:--</option>');
+                options.push('<option value="">--:--</option>');
                 for (var i = 0; i < timeslots.length; i++) {
                     options.push('<option value="', timeslots[i].id, '">', timeslots[i].timeslot, '</option>')
                 }
