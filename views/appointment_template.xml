@@ -233,7 +233,6 @@
 
         <template id="assets_frontend" name="website_date_info_assets" inherit_id="website.assets_frontend">
                <xpath expr="." position="inside">
-                   <link rel="stylesheet" href="/s2u_online_appointment/static/src/css/specimen_stylesheet.css" type="text/css" charset="utf-8" />
                    <link rel="stylesheet" href="/s2u_online_appointment/static/src/css/stylesheet.css" type="text/css" charset="utf-8" />
                    <script type="text/javascript" src="/s2u_online_appointment/static/src/js/main.js"></script>
                </xpath>
