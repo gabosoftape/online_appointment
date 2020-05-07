@@ -20,19 +20,33 @@
                         <button class="btn btn-danger" type="object" name="cancel_appointment" string="Cancelar"/>
                     </group>
                     <group>
-                        <button class="btn btn-success" type="object" name="confirm_appointment" string="Confirmar"/>
+                        <button class="btn btn-success" type="object" name="confirm_appointment" string="Confirmar Pago"/>
                     </group>
                 </div>
                 <form string="Registros">
                     <sheet>
-                        <group>
+                        <group string="Datos de paciente">
                             <group>
                                 <field name="name"/>
                                 <field name="partner_id"/>
-                                <field name="descripcion"/>
                             </group>
                             <group>
+                                <field name="descripcion"/>
+                                <field name="enfermedades"/>
+                                <field name="cirugias"/>
                             </group>
+                        </group>
+                        <group string="Datos tecnicos pago">
+                            <field name="event_id"/>
+                            <field name="factura"/>
+                        </group>
+                        <group string="Datos doctor">
+                            <field name="appointee_id"/>
+                            <field name="appointment_begin"/>
+                            <field name="appointment_end"/>
+                            <field name="appointee_interaction"/>
+                            <field name="diagnostico"/>
+                            <field name="medicacion "/>
                         </group>
                     </sheet>
                 </form>

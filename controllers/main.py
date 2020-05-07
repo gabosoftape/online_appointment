@@ -248,6 +248,8 @@ class OnlineAppointment(http.Controller):
             vals = {
                 'partner_id': request.env.user.partner_id.id,
                 'descripcion': post.get('remarks', False),
+                'enfermedades': post.get('antecedentes', False),
+                'cirugias': post.get('procedimientos', False),
                 'state': 'pending',
                 # 'appointee_id': self.appointee_id_to_partner_id(appointee_id),
                 #'event_id': appointment.id
