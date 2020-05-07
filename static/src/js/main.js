@@ -135,3 +135,4 @@ odoo.define('s2u_online_appoinment.main', function (require) {
         }
     })
 });
+
