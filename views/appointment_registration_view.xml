@@ -46,7 +46,7 @@
                             <field name="appointment_end"/>
                             <field name="appointee_interaction"/>
                             <field name="diagnostico"/>
-                            <field name="medicacion "/>
+                            <field name="medicacion"/>
                         </group>
                     </sheet>
                 </form>
