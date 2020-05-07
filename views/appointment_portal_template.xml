@@ -22,48 +22,119 @@
         </xpath>
     </template>
 
-    <template id="portal_my_appointments" name="My Appointments">
+    <template id="portal_my_appointments" name="Panel">
         <t t-call="portal.portal_layout">
-            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <div id="header">
 
-            <t t-call="portal.portal_searchbar">
-                <t t-set="title">Citas</t>
-            </t>
-            <t t-if="not appointments">
-                <div class="alert alert-warning mt8" role="alert">
-                    Las citas estan siendo preparadas, una vez se registre el pago se habilitara tu cita, con el doctor asignado
+            </div>
+            <div id="body">
+                <div class="row">
+                    <div id="content" class="col-lg-8">
+                        <section class="s_wsale_products_searchbar bg-200 pt24 pb24" data-name="Products Search">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-lg-12">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <h2 class="o_default_snippet_text">Busca un servicio</h2>
+                                      <p class="o_default_snippet_text">¡Tenemos servicios asombrosos en MEDCO, conózcalos ahora!</p>
+                                      <form method="get" class="o_wsale_products_searchbar_form s_wsale_products_searchbar_input mb-3" action="/shop">
+                                        <div role="search" class="input-group">
+                                          <input type="text" name="search" class="search-query form-control oe_search_box" placeholder="Buscar..." data-limit="5" data-display-description="true" data-display-price="true" data-display-image="true" autocomplete="off"/>
+                                          <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary oe_search_button" aria-label="Búsqueda" title="Búsqueda">
+                                              <i class="fa fa-search"/>
+                                            </button>
+                                          </div>
+                                        </div>
+                                        <input name="order" type="hidden" class="o_wsale_search_order_by" value=""/>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </section>
+                    <section>
+                        <div id="appointmentsdiv">
+
+                            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                            <t t-call="portal.portal_searchbar">
+                                <t t-set="title">Citas</t>
+                            </t>
+                            <t t-if="not appointments">
+                                <div class="alert alert-warning mt8" role="alert">
+                                    Las citas estan siendo preparadas, una vez se registre el pago se habilitara tu cita, con el doctor asignado
+                                </div>
+                            </t>
+                            <t t-if="appointments" t-call="portal.portal_table">
+                                <tbody>
+                                    <tr t-foreach="appointments" t-as="appointment">
+                                        <td>
+                                            <a t-attf-href="/my/online-appointment/#{appointment.id}?{{ keep_query() }}"><span t-field="appointment.name"/></a>
+                                        </td>
+                                        <td t-if="appointment.sudo().partner_id.id == request.env.user.partner_id.id">
+                                            With: <span t-field="appointment.sudo().appointee_id.name" />
+                                        </td>
+                                        <td t-else="">
+                                            With: <span t-field="appointment.sudo().partner_id.name" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="appointment.appointment_begin" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="appointment.appointment_end" />
+                                        </td>
+                                        <td t-if="appointment.state == 'cancel'">
+                                            <span class="badge badge-pill badge-info">Cancelada</span>
+                                        </td>
+                                        <td t-if="appointment.state == 'pending'">
+                                            <span class="badge badge-pill badge-danger">Pendiente...</span>
+                                        </td>
+                                        <td t-if="appointment.state == 'valid'">
+                                            <span class="badge badge-pill badge-info">Confirmada</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </t>
+                        </div>
+                    </section>
+                    </div>
+                    <div id="sidebar" class="col-lg-4">
+                        <section style="display: flex; justify-content: center;">
+                             <div style="width: 300px;">
+                                <div style="border-radius:25px; background-color: #ffffff; box-shadow: 10px 20px 37px -21px rgba(0,0,0,0.75); margin-top:2rem; margin-bottom:2rem;">
+                                    <div style="background-color:#0064ff; color: #ffffff; border-radius: 25px 25px 15px 15px;">
+                                      <div style="padding-left:2rem; padding-right:2rem; padding-top:1rem; padding-bottom:1rem;">
+                                        <span style="text-align: center; font-size: 20px;">Solicita tu consulta<br/></span>
+                                        <span style="text-align: center;">Como te gustaria ser atendido?</span>
+                                      </div>
+                                    </div>
+                                    <div style="padding-left: 20px; padding-right:20px; padding-bottom:2rem;">
+                                        <div class=" text-center mt-2 mb-2">
+                                            <a href="/online-appointment" class="btn btn-primary"><i class="fa fa-file-video-o"></i> Videoconsulta</a>
+                                        </div>
+                                      <div class="text-center mt-2 mb-2">
+                                          <a href="#" class="btn btn-primary" style="text-decoration: none; color: #00d2ff; background-color: #003ca0;"><i class="fa fa-file-video-o"></i> Domicilio</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                             </div>
+                        </section>
+                        <section>
+                            <div class="o_portal_my_details" style="align-content: flex-end;">
+                                <h4>Mi informacion <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/>Editar</a></h4>
+                                <hr class="mt-1 mb-0"/>
+                                <div t-field="user_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;email&quot;, &quot;phone&quot;, &quot;address&quot;, &quot;name&quot;]}"/>
+                              </div>
+                        </section>
+                    </div>
                 </div>
-            </t>
-            <t t-if="appointments" t-call="portal.portal_table">
-                <tbody>
-                    <tr t-foreach="appointments" t-as="appointment">
-                        <td>
-                            <a t-attf-href="/my/online-appointment/#{appointment.id}?{{ keep_query() }}"><span t-field="appointment.name"/></a>
-                        </td>
-                        <td t-if="appointment.sudo().partner_id.id == request.env.user.partner_id.id">
-                            With: <span t-field="appointment.sudo().appointee_id.name" />
-                        </td>
-                        <td t-else="">
-                            With: <span t-field="appointment.sudo().partner_id.name" />
-                        </td>
-                        <td class="text-right">
-                            <span t-field="appointment.appointment_begin" />
-                        </td>
-                        <td class="text-right">
-                            <span t-field="appointment.appointment_end" />
-                        </td>
-                        <td t-if="appointment.state == 'cancel'">
-                            <span class="badge badge-pill badge-info">Canceled</span>
-                        </td>
-                        <td t-if="appointment.state == 'pending'">
-                            <span class="badge badge-pill badge-danger">Pending ...</span>
-                        </td>
-                        <td t-if="appointment.state == 'valid'">
-                            <span class="badge badge-pill badge-info">Confirmed</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </t>
+            </div>
+            <div id="footer">
+
+            </div>
+
         </t>
     </template>
 
@@ -72,16 +143,16 @@
             <t t-call="portal.portal_record_layout">
                 <t t-set="card_header">
                     <h5 class="mb-0">
-                        <small class="text-muted">Appointment - </small><span t-field="appointment.name"/>
+                        <small class="text-muted">Cita - </small><span t-field="appointment.name"/>
                         <span class="float-right">
                             <t t-if="appointment.state == 'cancel'">
-                                <span class="badge badge-pill badge-info">Canceled</span>
+                                <span class="badge badge-pill badge-info">Cancelada</span>
                             </t>
                             <t t-if="appointment.state == 'pending'">
-                                <span class="badge badge-pill badge-danger">Pending ...</span>
+                                <span class="badge badge-pill badge-danger">Pendiente ...</span>
                             </t>
                             <t t-if="appointment.state == 'valid'">
-                                <span class="badge badge-pill badge-info">Confirmed</span>
+                                <span class="badge badge-pill badge-info">Confirmada</span>
                             </t>
                         </span>
                     </h5>
@@ -116,7 +187,7 @@
                         </t>
                         <t t-else="">
                             <div t-if="appointment.appointee_id" class="col-12 col-md-6">
-                                <h6>You</h6>
+                                <h6>Tú</h6>
                                 <div class="row">
                                     <div class="col flex-grow-0 pr-3">
                                         <img t-if="appointment.appointee_id.image_1024" class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(appointment.appointee_id.image_1024)" alt="Appointee"/>
@@ -128,7 +199,7 @@
                                 </div>
                             </div>
                             <div t-if="appointment.partner_id" class="col-12 col-md-6 mb-2 mb-md-0">
-                                <h6>With</h6>
+                                <h6>Doctor Asignado</h6>
                                 <div class="row">
                                     <div class="col flex-grow-0 pr-3">
                                         <img t-if="appointment.partner_id.image_1024" class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(appointment.partner_id.image_1024)" alt="Contact"/>
@@ -143,21 +214,21 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 mb-2 mb-md-0">
-                            <h6>From</h6>
+                            <h6>Hora de inicio</h6>
                             <div class="row">
                                 <div class="col flex-grow-1 pr-3"><b><span t-field="appointment.appointment_begin" /></b></div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
-                            <h6>Till</h6>
-                            <div class="row">
+                            <h6>Hasta</h6>
+                            <div clas="row">
                                 <div class="col flex-grow-1 pr-3"><b><span t-field="appointment.appointment_end" /></b></div>
                             </div>
                         </div>
                     </div>
                     <div class="row mt8">
                         <div class="col-12 col-md-12 mb-2 mb-md-0">
-                            <h6>Remarks:</h6>
+                            <h6>Sintomas</h6>
                             <div class="row">
                                 <div class="col-12"><span t-field="appointment.event_id.description" /></div>
                             </div>

@@ -10,17 +10,21 @@ class AppointmentRegistration(models.Model):
 
     event_id = fields.Many2one('calendar.event', string='Event', ondelete='cascade')
     partner_id = fields.Many2one('res.partner', string='Cliente', ondelete='cascade')
-    appointee_id = fields.Many2one('res.partner', string='Appointee', ondelete='cascade')
-    appointment_begin = fields.Datetime(string="Event Start Date", related='event_id.start', readonly=True, store=True)
-    appointment_end = fields.Datetime(string="Event End Date", related='event_id.stop', readonly=True)
+    appointee_id = fields.Many2one('res.partner', string='Doctor', ondelete='cascade')
+    appointment_begin = fields.Datetime(string="Inicio de evento", related='event_id.start', readonly=True, store=True)
+    appointment_end = fields.Datetime(string="Fin de Evento", related='event_id.stop', readonly=True)
     name = fields.Char(string='Evento', related='partner_id.name', readonly=True, store=True)
     state = fields.Selection([
-        ('pending', _('Pending')),
-        ('valid', _('Scheduled')),
-        ('cancel', _('Canceled')),
+        ('pending', _('Pendiente')),
+        ('valid', _('Agendada')),
+        ('cancel', _('Cancelada')),
     ], required=True, default='valid', string='Status', copy=False)
-    descripcion = fields.Text(string="Descripcion de sintomas")
-    appointee_interaction = fields.Boolean(string='Appointee interaction', default=False)
+    descripcion = fields.Text(string="Descripcion de sintomas del paciente")
+    appointee_interaction = fields.Boolean(string='Terminada', default=False)
+    diagnostico = fields.Text(string="Diagnostico")
+    medicacion = fields.Text(string="Medicacion")
+    enfermedades = fields.Text(string="Antecedente Enfermedades")
+    cirugias = fields.Text(string="Antecedentes procedimientos quirurgicos")
 
     def cancel_appointment(self):
         for appointment in self:

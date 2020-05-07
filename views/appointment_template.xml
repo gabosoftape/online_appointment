@@ -21,21 +21,10 @@
                                    </div>
                                    <t t-if="mode == 'registered'">
                                        <div class="form-group col-xl-6">
-                                           <label class="control-label" for="name">Nombre</label>
                                            <div>
-                                               <input type="text" class="form-control" readonly="True" name="name" t-att-value="name"/>
-                                           </div>
-                                       </div>
-                                       <div class="form-group col-xl-6">
-                                           <label class="control-label" for="name">Correo electronico</label>
-                                           <div>
-                                               <input type="text" class="form-control" name="email" readonly="True" t-att-value="email"/>
-                                           </div>
-                                       </div>
-                                       <div class="form-group col-xl-6">
-                                           <label class="control-label" for="name">Telefono</label>
-                                           <div>
-                                               <input type="text" class="form-control" name="phone" readonly="True" t-att-value="phone"/>
+                                               <input type="hidden" class="form-control" readonly="True" name="name" t-att-value="name"/>
+                                               <input type="hidden" class="form-control" name="email" readonly="True" t-att-value="email"/>
+                                               <input type="hidden" class="form-control" name="phone" readonly="True" t-att-value="phone"/>
                                            </div>
                                        </div>
                                    </t>
@@ -107,6 +96,18 @@
                                            </select>
                                        </div>
                                    </div> -->
+                                   <div class="form-group col-lg-12">
+                                       <label class="control-label" for="remarks">Antecedente Enfermedades</label>
+                                       <div>
+                                           <textarea class="form-control" cols="60" name="antecedentes" rows="6"></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group col-lg-12">
+                                       <label class="control-label" for="remarks">Antecedente procedimientos quirurgicos</label>
+                                       <div>
+                                           <textarea class="form-control" cols="60" name="procedimientos" rows="6"></textarea>
+                                       </div>
+                                   </div>
                                    <div class="form-group col-lg-12">
                                        <label class="control-label" for="remarks">Descripcion de los sintomas</label>
                                        <div>

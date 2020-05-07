@@ -44,13 +44,13 @@ class CustomerPortal(CustomerPortal):
         order = searchbar_sortings[sortby]['order']
 
         searchbar_filters = {
-            'all': {'label': _('All'), 'domain': []},
-            'pending': {'label': _('Pending'), 'domain': [('state', '=', 'pending')]},
-            'valid': {'label': _('Confirmed'), 'domain': [('state', '=', 'valid')]},
-            'cancel': {'label': _('Canceled'), 'domain': [('state', '=', 'cancel')]},
+            'Todo': {'label': _('All'), 'domain': []},
+            'pendientes': {'label': _('Pending'), 'domain': [('state', '=', 'pending')]},
+            'validadas': {'label': _('Confirmed'), 'domain': [('state', '=', 'valid')]},
+            'canceladas': {'label': _('Canceled'), 'domain': [('state', '=', 'cancel')]},
         }
         if not filterby:
-            filterby = 'all'
+            filterby = 'Todo'
         domain = searchbar_filters[filterby]['domain'] + domain
 
         # archive groups - Default Group By 'create_date'
