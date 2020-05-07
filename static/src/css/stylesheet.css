@@ -10,3 +10,11 @@
     font-style: normal;
 
 }
+@font-face {
+    font-family: 'frutigerblack';
+    src: url('/s2u_online_appointment/static/src/font/frutiger_77_black_condensed-webfont.woff2') format('woff2'),
+         url('/s2u_online_appointment/static/src/font/frutiger_77_black_condensed-webfont.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+
+}
