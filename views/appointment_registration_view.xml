@@ -38,6 +38,7 @@
                         </group>
                         <group string="Datos tecnicos pago">
                             <field name="event_id"/>
+                            <field name="orden"/>
                             <field name="factura"/>
                         </group>
                         <group string="Datos doctor">
