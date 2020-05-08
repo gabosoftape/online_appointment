@@ -25,3 +25,16 @@
     font-weight: 900;
     font-style: normal;
 }
+@font-face {
+font-family: 'Frutiger';
+font-style: normal;
+font-weight: normal;
+src: url('/s2u_online_appointment/static/src/font/Frutiger.woff') format('woff');
+}
+
+@font-face {
+font-family: 'Frutiger Bold';
+font-style: normal;
+font-weight: normal;
+src: url('/s2u_online_appointment/static/src/font/Frutiger_bold.woff') format('woff');
+}
