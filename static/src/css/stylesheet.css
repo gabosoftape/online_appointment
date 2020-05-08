@@ -20,8 +20,8 @@
 }
 @font-face {
     font-family: 'frutigerbold';
-    src: url('frutiger-bold_18817-webfont.woff2') format('woff2'),
-         url('frutiger-bold_18817-webfont.woff') format('woff');
+    src: url('/s2u_online_appointment/static/src/font/frutiger-bold_18817-webfont.woff2') format('woff2'),
+         url('/s2u_online_appointment/static/src/font/frutiger-bold_18817-webfont.woff') format('woff');
     font-weight: 900;
     font-style: normal;
 }
