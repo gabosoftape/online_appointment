@@ -34,20 +34,20 @@ class CustomerPortal(CustomerPortal):
         domain = [('partner_id', '=', request.env.user.partner_id.id)]
 
         searchbar_sortings = {
-            'new': {'label': _('Newest'), 'order': 'id desc'},
-            'date1': {'label': _('Date ↓'), 'order': 'appointment_begin'},
-            'date2': {'label': _('Date ↑'), 'order': 'appointment_begin desc'},
-            'name': {'label': _('Name'), 'order': 'name'},
+            'new': {'label': _('Recientes'), 'order': 'id desc'},
+            'date1': {'label': _('Fecha ↓'), 'order': 'appointment_begin'},
+            'date2': {'label': _('Fecha ↑'), 'order': 'appointment_begin desc'},
+            'name': {'label': _('Nombre'), 'order': 'name'},
         }
         if not sortby or sortby not in searchbar_sortings.keys():
             sortby = 'new'
         order = searchbar_sortings[sortby]['order']
 
         searchbar_filters = {
-            'Todo': {'label': _('All'), 'domain': []},
-            'pendientes': {'label': _('Pending'), 'domain': [('state', '=', 'pending')]},
-            'validadas': {'label': _('Confirmed'), 'domain': [('state', '=', 'valid')]},
-            'canceladas': {'label': _('Canceled'), 'domain': [('state', '=', 'cancel')]},
+            'Todo': {'label': _('Todo'), 'domain': []},
+            'pending': {'label': _('Pendientes'), 'domain': [('state', '=', 'pending')]},
+            'scheduled': {'label': _('Confirmadas'), 'domain': [('state', '=', 'valid')]},
+            'cancel': {'label': _('Canceladas'), 'domain': [('state', '=', 'cancel')]},
         }
         if not filterby:
             filterby = 'Todo'
@@ -69,7 +69,7 @@ class CustomerPortal(CustomerPortal):
         )
 
         # content according to pager and archive selected
-        appointments = request.env['s2u.appointment.registration'].search([('state', '=', 'valid')], order=order, limit=self._items_per_page, offset=pager['offset'])
+        appointments = request.env['s2u.appointment.registration'].search([('state', '=', 'valid'),('partner_id', '=', request.env.user.partner_id.id)], order=order, limit=self._items_per_page, offset=pager['offset'])
         request.session['my_appointments_history'] = appointments.ids[:100]
 
         values.update({
