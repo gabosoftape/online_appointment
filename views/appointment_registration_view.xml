@@ -71,7 +71,7 @@
         </record>
 
         <menuitem name="Appointment Registros" id="menu_appointment_reg"
-                  parent="menu_appointment"  action="appointment_reg_action" sequence="30"/>
+                  parent="menu_appointment_root"  action="appointment_reg_action" sequence="30"/>
 
     </data>
 </odoo>

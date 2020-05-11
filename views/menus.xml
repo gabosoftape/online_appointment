@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <menuitem id="menu_appointment"
-            name="Appointment"
-            sequence="100"
-            parent="website.menu_website_global_configuration"/>
+        <menuitem id="menu_appointment_root"
+            name="Citas Medicas"
+            web_icon="s2u_online_appointment,static/description/icon.png"/>
 
     </data>
 </odoo>

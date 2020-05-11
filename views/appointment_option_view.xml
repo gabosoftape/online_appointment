@@ -45,7 +45,7 @@
         </record>
 
         <menuitem name="Appointment Options" id="menu_appointment_option"
-                  parent="menu_appointment" groups="website.group_website_designer" action="appointment_option_action" sequence="20"/>
+                  parent="menu_appointment_root" groups="website.group_website_designer" action="appointment_option_action" sequence="20"/>
 
     </data>
 </odoo>
