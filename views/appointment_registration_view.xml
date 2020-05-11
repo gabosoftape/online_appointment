@@ -15,14 +15,12 @@
         <record model="ir.ui.view" id="appointment_option_form_view">
             <field name="model">s2u.appointment.registration</field>
             <field name="arch" type="xml">
-                <div>
-                    <group>
-                        <button class="btn btn-danger" type="object" name="cancel_appointment" string="Cancelar"/>
-                        <button class="btn btn-success" type="object" name="confirm_appointment" string="Confirmar Pago"/>
-                    </group>
-                </div>
-                <form string="Registros">
-                    <sheet>
+                <header>
+                    <button type="object" name="cancel_appointment" string="Cancelar" attrs="{'invisible': [('state', 'not in', ['valid'])]}"/>
+                    <button type="object" class="btn-primary" name="confirm_appointment" string="Confirmar Pago"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,valid,iniciada,finish,cancel"/>
+                </header>
+                <sheet>
                         <group string="Datos tecnicos pago">
                             <field name="event_id"/>
                             <field name="factura"/>
@@ -47,8 +45,8 @@
                             <field name="diagnostico"/>
                             <field name="medicacion"/>
                         </group>
-                    </sheet>
-                </form>
+                </sheet>
+
             </field>
         </record>
 
