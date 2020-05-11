@@ -542,6 +542,10 @@ class OnlineAppointment(http.Controller):
 
         return request.redirect('/my/online-appointments')
 
+    @http.route(['/my', '/my/home'], type='http', auth="user", website=True)
+    def home_redirect(self, **kw):
+        return request.redirect('/my/online-appointments')
+
     @http.route(['/online-appointment/portal/confirm'], auth="public", type='http', website=True)
     def online_appointment_portal_confirm(self, **post):
 
