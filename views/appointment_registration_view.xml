@@ -37,13 +37,13 @@
                             </group>
                         </group>
 
-                        <group string="Datos doctor" attrs="{'readonly': [('state', 'not in', ['valid'])]}">
+                        <group string="Datos doctor" >
                             <field name="appointee_id"/>
                             <field name="appointment_begin"/>
                             <field name="appointment_end"/>
                             <field name="appointee_interaction"/>
-                            <field name="diagnostico"/>
-                            <field name="medicacion"/>
+                            <field name="diagnostico" attrs="{'readonly': [('state', 'not in', ['iniciada'])]}"/>
+                            <field name="medicacion" attrs="{'readonly': [('state', 'not in', ['iniciada'])]}"/>
                         </group>
                 </sheet>
 

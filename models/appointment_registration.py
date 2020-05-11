@@ -50,3 +50,13 @@ class AppointmentRegistration(models.Model):
                 })
 
         return True
+
+    def start_appointment(self):
+
+        for appointment in self:
+            if appointment.state == 'pending':
+                appointment.write({
+                    'state': 'valid'
+                })
+
+        return True
