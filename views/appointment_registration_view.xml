@@ -18,13 +18,15 @@
                 <div>
                     <group>
                         <button class="btn btn-danger" type="object" name="cancel_appointment" string="Cancelar"/>
-                    </group>
-                    <group>
                         <button class="btn btn-success" type="object" name="confirm_appointment" string="Confirmar Pago"/>
                     </group>
                 </div>
                 <form string="Registros">
                     <sheet>
+                        <group string="Datos tecnicos pago">
+                            <field name="event_id"/>
+                            <field name="factura"/>
+                        </group>
                         <group string="Datos de paciente">
                             <group>
                                 <field name="name"/>
@@ -36,10 +38,7 @@
                                 <field name="cirugias"/>
                             </group>
                         </group>
-                        <group string="Datos tecnicos pago">
-                            <field name="event_id"/>
-                            <field name="factura"/>
-                        </group>
+
                         <group string="Datos doctor">
                             <field name="appointee_id"/>
                             <field name="appointment_begin"/>
@@ -56,7 +55,7 @@
         <record model="ir.ui.view" id="appointment_option_tree_view">
             <field name="model">s2u.appointment.registration</field>
             <field name="arch" type="xml">
-                <tree string="Appointment registros">
+                <tree string="Consultas">
                     <field name="name"/>
                     <field name="descripcion"/>
                     <field name="state"/>
@@ -65,7 +64,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="appointment_reg_action">
-            <field name="name">Appointment Registros</field>
+            <field name="name">Consultas MED&CO</field>
             <field name="res_model">s2u.appointment.registration</field>
             <field name="view_mode">tree,form</field>
         </record>
