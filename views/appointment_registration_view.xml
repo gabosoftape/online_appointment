@@ -70,7 +70,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Appointment Registros" id="menu_appointment_reg"
+        <menuitem name="Consultas" id="menu_appointment_reg"
                   parent="menu_appointment_root"  action="appointment_reg_action" sequence="30"/>
 
     </data>

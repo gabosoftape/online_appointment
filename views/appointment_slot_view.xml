@@ -48,7 +48,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Appointment Slots" id="menu_appointment_slot"
+        <menuitem name="Doctores" id="menu_appointment_slot"
                   parent="menu_appointment_root" groups="website.group_website_designer"
                   action="appointment_slot_action" sequence="10"/>
 
