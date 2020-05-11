@@ -18,8 +18,8 @@ class AppointmentRegistration(models.Model):
     state = fields.Selection([
         ('pending', _('Pendiente')),
         ('valid', _('Agendada')),
-        ('iniciada', _('Iniciada'))
-        ('finish',_('Finalizada'))
+        ('iniciada', _('Iniciada')),
+        ('finish',_('Finalizada')),
         ('cancel', _('Cancelada')),
     ], required=True, default='valid', string='Status', copy=False)
     descripcion = fields.Text(string="Descripcion de sintomas del paciente")
