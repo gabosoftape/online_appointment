@@ -17,15 +17,15 @@
             <field name="arch" type="xml">
                 <header>
                     <button type="object" name="cancel_appointment" string="Cancelar" attrs="{'invisible': [('state', 'not in', ['valid'])]}"/>
-                    <button type="object" class="btn-primary" name="confirm_appointment" string="Confirmar Pago"/>
+                    <button type="object" class="btn-primary" name="confirm_appointment" string="Confirmar Pago" attrs="{'invisible': [('state', 'not in', ['pending'])]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="pending,valid,iniciada,finish,cancel"/>
                 </header>
                 <sheet>
-                        <group string="Datos tecnicos pago">
+                        <group string="Datos tecnicos pago" attrs="{'invisible': [('state', 'not in', ['valid'])]}">
                             <field name="event_id"/>
                             <field name="factura"/>
                         </group>
-                        <group string="Datos de paciente">
+                        <group string="Datos de paciente" attrs="{'readonly': [('state', 'not in', ['valid'])]}">
                             <group>
                                 <field name="name"/>
                                 <field name="partner_id"/>
@@ -37,7 +37,7 @@
                             </group>
                         </group>
 
-                        <group string="Datos doctor">
+                        <group string="Datos doctor" attrs="{'readonly': [('state', 'not in', ['valid'])]}">
                             <field name="appointee_id"/>
                             <field name="appointment_begin"/>
                             <field name="appointment_end"/>
