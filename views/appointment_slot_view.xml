@@ -50,7 +50,7 @@
 
         <menuitem name="Doctores" id="menu_appointment_slot"
                   parent="menu_appointment_root" groups="website.group_website_designer"
-                  action="appointment_slot_action" sequence="10"/>
+                  action="appointment_slot_action" sequence="30"/>
 
     </data>
 </odoo>

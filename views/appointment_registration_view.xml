@@ -68,7 +68,7 @@
         </record>
 
         <menuitem name="Consultas" id="menu_appointment_reg"
-                  parent="menu_appointment_root"  action="appointment_reg_action" sequence="30"/>
+                  parent="menu_appointment_root"  action="appointment_reg_action" sequence="10"/>
 
     </data>
 </odoo>
