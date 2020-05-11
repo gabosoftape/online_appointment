@@ -64,7 +64,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="appointment_reg_action">
-            <field name="name">Consultas MED&CO</field>
+            <field name="name">Consultas MEDCO</field>
             <field name="res_model">s2u.appointment.registration</field>
             <field name="view_mode">tree,form</field>
         </record>
