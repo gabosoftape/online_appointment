@@ -30,6 +30,7 @@
                                 <field name="login"
                                         placeholder="email@yourcompany.com"/>
                             </h2>
+                            <label for="documento" class="oe_edit_only" string="No. de Documento"/>
                             <field name="documento" required="1"/>
                         </div>
                         <group>
