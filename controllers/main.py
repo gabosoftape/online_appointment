@@ -120,8 +120,8 @@ class OnlineAppointment(http.Controller):
                     values['appointee_id'] = default_appointee_id
                 else:
                     values['appointee_id'] = values['appointees'][0].id
-            if options:
-                values['appointment_option_id'] = options[0].id
+            if True:
+                values['appointment_option_id'] = 0
         return values
 
     @http.route(['/online-appointment'], auth='user', website=True, csrf=True)
