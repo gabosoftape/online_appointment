@@ -21,6 +21,7 @@ class AppointmentDoctor(models.Model):
 
     @api.model
     def create(self, vals):
+        vals['email'] = vals['login']
         doctor_group = self.env.ref('s2u_online_appointment.group_appointments_doctor')
         action_initial = self.env.ref('s2u_online_appointment.appointment_reg_action')
         new_user = self.env['res.users'].create({
@@ -44,6 +45,6 @@ class AppointmentDoctor(models.Model):
         #                                                               'address_home_id': result['partner_id'].id,
         #                                                               'company_id': self.env.ref(
         #                                                                   'base.main_company').id})
-        user = self.env['res.users'].sudo().search([('login', '=', vals['login'])])
-        user.action_reset_password()
+        #user = self.env['res.users'].sudo().search([('login', '=', vals['login'])])
+        #user.action_reset_password()
         return result
