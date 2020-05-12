@@ -262,7 +262,7 @@ class OnlineAppointment(http.Controller):
                 'error_message': [],
                 'registration_id': False,
             }
-            return request.render('s2u_online_appointment.pay', values)
+            return request.render('s2u_online_appointment.thanks', values)
 
         if request.env.user._is_public():
             values = {
@@ -282,7 +282,7 @@ class OnlineAppointment(http.Controller):
                 'appointment': registro,
                 'error_message': []
             }
-            return request.render('s2u_online_appointment.pay', values)
+            return request.redirect('/shop/cart/update?product_id=2&amp;express=1')
 
     def recurrent_events_overlapping(self, appointee_id, event_start, event_stop):
         query = """
