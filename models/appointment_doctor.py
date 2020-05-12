@@ -16,7 +16,7 @@ class AppointmentDoctor(models.Model):
     documento = fields.Char('No. Documento')
     image = fields.Binary('Imagen')
     partner_id = fields.Many2one('res.partner', ondelete='restrict',
-                                 string='Related Partner', help='Partner-related data of the user')
+                                 string='Cliente relacionado', help='Partner-related data of the user')
     res_group_id = fields.Many2many('res.groups', 'rel_faculty_group', string="Assign Group", required=True)
 
     @api.model

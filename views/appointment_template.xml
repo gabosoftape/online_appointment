@@ -2,7 +2,7 @@
 <odoo>
     <data>
         
-       <template id="s2u_online_appointment.make_appointment" name="Online Appointment">
+       <template id="s2u_online_appointment.make_appointment" name="Cita Online">
            <t t-call="website.layout">
                <style type="text/css">
 			       .color_green a{background:green !important;}
@@ -154,7 +154,7 @@
             </t>
         </template>
     
-        <template id="s2u_online_appointment.thanks" name="Appointment Scheduled">
+        <template id="s2u_online_appointment.thanks" name="Cita agendada">
             <t t-call="website.layout">
                 <div id="wrap">
                     <div class="oe_structure"/>

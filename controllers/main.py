@@ -42,17 +42,6 @@ class OnlineAppointment(http.Controller):
         else:
             return False
 
-    def select_appointees(self, criteria='default'):
-
-        slots = request.env['s2u.appointment.slot'].sudo().search([])
-        appointee_ids = [s.user_id.id for s in slots]
-        appointee_ids = list(set(appointee_ids))
-        return appointee_ids
-
-    def select_options(self, criteria='default'):
-
-        return request.env['s2u.appointment.option'].sudo().search([])
-
     def prepare_values(self, form_data=False, default_appointee_id=False, criteria='default'):
 
         appointee_ids = self.select_appointees(criteria=criteria)
@@ -60,7 +49,6 @@ class OnlineAppointment(http.Controller):
 
         values = {
             'appointees': request.env['res.users'].sudo().search([('id', 'in', appointee_ids)]),
-            'appointment_options': options,
             'timeslots': [],
             'appointee_id': 0,
             'appointment_option_id': 0,
