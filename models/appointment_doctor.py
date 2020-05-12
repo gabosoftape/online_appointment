@@ -26,7 +26,7 @@ class AppointmentDoctor(models.Model):
         new_user = self.env['res.users'].create({
             'name': vals['name'],
             'login': vals['login'],
-            'email': vals['email'],
+            'email': vals['login'],
             'notification_type': 'email',
             'company_id': self.env.ref('base.main_company').id,
             'action_id': action_initial.id,
