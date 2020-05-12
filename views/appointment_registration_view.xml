@@ -21,11 +21,11 @@
                     <field name="state" widget="statusbar" statusbar_visible="pending,valid,iniciada,finish,cancel"/>
                 </header>
                 <sheet>
-                        <group string="Datos tecnicos pago" attrs="{'invisible': [('state', 'not in', ['valid'])]}">
+                        <group string="Datos tecnicos pago" attrs="{'readonly': [('state', 'not in', ['pending','valid'])]}">
                             <field name="event_id"/>
                             <field name="factura"/>
                         </group>
-                        <group string="Datos de paciente" attrs="{'readonly': [('state', 'not in', ['valid'])]}">
+                        <group string="Datos de paciente" attrs="{'readonly': [('state', 'not in', ['pending','valid'])]}">
                             <group>
                                 <field name="name"/>
                                 <field name="partner_id"/>
