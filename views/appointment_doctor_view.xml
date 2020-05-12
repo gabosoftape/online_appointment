@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="appointment_doctor_search">
+            <field name="model">s2u.appointment.doctor</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="documento"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="appointment_doctor_form_view">
+            <field name="model">s2u.appointment.doctor</field>
+            <field name="arch" type="xml">
+                <form string="Nuevo Cliente">
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <div class="alert alert-info text-center mb-3" attrs="{'invisible': [('id', '>', 0)]}" role="alert">
+                            Estas invitando a un nuevo usuario.
+                        </div>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image": "image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" required="1"/></h1>
+                            <field name="email" invisible="1"/>
+                            <label for="login" class="oe_edit_only" string="Email Address"/>
+                            <h2>
+                                <field name="login"
+                                        placeholder="email@yourcompany.com"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <field name="phone" widget="phone"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="appointment_doctor_tree_view">
+            <field name="model">s2u.appointment.doctor</field>
+            <field name="arch" type="xml">
+                <tree string="Doctores">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone" widget="phone"/>
+                    <field name="documento"/>
+                </tree>
+            </field>
+        </record>
+
+        
+        <record model="ir.actions.act_window" id="appointment_doctor_action">
+            <field name="name">Doctores</field>
+            <field name="res_model">s2u.appointment.doctor</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Doctores" id="menu_appointment_doctor"
+                  parent="menu_appointment_root" groups="website.group_website_designer,s2u_online_appointment.group_appointments_super_manager,s2u_online_appointment.group_appointments_manager"
+                  action="appointment_doctor_action" sequence="30"/>
+
+    </data>
+</odoo>

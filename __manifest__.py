@@ -35,13 +35,14 @@
         'portal'
     ],
     'data': [
-        'security/ir.model.access.csv',
+        'security/appointments_security.xml',
         'views/appointment_template.xml',
         'views/appointment_portal_template.xml',
         'views/menus.xml',
-        'views/appointment_slot_view.xml',
+        'views/appointment_doctor_view.xml',
         'views/appointment_option_view.xml',
         'views/appointment_registration_view.xml',
+        'security/ir.model.access.csv'
     ],
     'qweb': [
     ],

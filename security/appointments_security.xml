@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xml>
+<odoo>
+    <!-- create new category -->
+    <record id="category_appointments" model="ir.module.category" >
+            <field name="name">Gestion Medco</field>
+            <field name="description">Permisos de usuarios medco.</field>
+    </record>
+    <!-- add category to groups -->
+
+    <!--Group for appointments super manager -->
+    <record id="group_appointments_super_manager" model="res.groups">
+        <field name="name">Root Administrador</field>
+        <field name="category_id" ref="s2u_online_appointment.category_appointments"/>
+    </record>
+    <!--Group for appointments manager -->
+    <record id="group_appointments_manager" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="s2u_online_appointment.category_appointments"/>
+    </record>
+    <!--Group for appointments Doctor -->
+    <record id="group_appointments_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="category_id" ref="s2u_online_appointment.category_appointments"/>
+    </record>
+
+   <record id="unique_appointment_user_rule" model="ir.rule">
+        <field name="name">Ver solo Mis propiedades</field>
+        <field name="model_id" ref="s2u_online_appointment.model_s2u_appointment_registration"/>
+        <field name="domain_force">[('partner_id.id','=',user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('s2u_online_appointment.group_appointments_doctor'))]"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="0"/>
+    </record>
+
+</odoo>
