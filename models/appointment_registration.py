@@ -11,7 +11,7 @@ class AppointmentRegistration(models.Model):
     event_id = fields.Many2one('calendar.event', string='Evento', ondelete='cascade')
     factura = fields.Many2one('account.move', string="Factura vinculada")
     partner_id = fields.Many2one('res.partner', string='Cliente', ondelete='cascade')
-    appointee_id = fields.Many2one('res.partner', string='Doctor', ondelete='cascade')
+    appointee_id = fields.Many2one('s2u.appointment.doctor', string='Doctor', ondelete='cascade')
     appointment_begin = fields.Datetime(string="Inicio de evento", related='event_id.start', readonly=True, store=True)
     appointment_end = fields.Datetime(string="Fin de Evento", related='event_id.stop', readonly=True)
     name = fields.Char(string='Evento', related='partner_id.name', readonly=True, store=True)
