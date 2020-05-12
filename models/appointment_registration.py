@@ -8,7 +8,7 @@ class AppointmentRegistration(models.Model):
     _description = 'Appointment Registration'
     _inherit = ['portal.mixin', 'mail.thread.cc', 'mail.activity.mixin']
 
-    event_id = fields.Many2one('calendar.event', string='Event', ondelete='cascade')
+    event_id = fields.Many2one('calendar.event', string='Evento', ondelete='cascade')
     factura = fields.Many2one('account.move', string="Factura vinculada")
     partner_id = fields.Many2one('res.partner', string='Cliente', ondelete='cascade')
     appointee_id = fields.Many2one('res.partner', string='Doctor', ondelete='cascade')

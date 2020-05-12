@@ -12,7 +12,7 @@
         </xpath>
     </template>
 
-    <template id="portal_my_home" name="Portal My Home: appointment entries" inherit_id="portal.portal_my_home" priority="40">
+    <template id="portal_my_home" name="Portal My Home: Mis consultas" inherit_id="portal.portal_my_home" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-if="appointment_count" t-call="portal.portal_docs_entry">
                 <t t-set="title">Citas </t>
@@ -138,7 +138,7 @@
         </t>
     </template>
 
-    <template id="portal_my_appointment" name="My Appointment">
+    <template id="portal_my_appointment" name="Mi consulta">
         <t t-call="portal.portal_layout">
             <t t-call="portal.portal_record_layout">
                 <t t-set="card_header">
@@ -146,12 +146,15 @@
                         <small class="text-muted">Cita - </small><span t-field="appointment.name"/>
                         <span class="float-right">
                             <t t-if="appointment.state == 'cancel'">
+                                <small class="text-muted">Estado - </small><span t-field="appointment.name"/>
                                 <span class="badge badge-pill badge-info">Cancelada</span>
                             </t>
                             <t t-if="appointment.state == 'pending'">
-                                <span class="badge badge-pill badge-danger">Pendiente ...</span>
+                                <small class="text-muted">Estado - </small><span t-field="appointment.name"/>
+                                <span class="badge badge-pill badge-danger">Pendiente</span>
                             </t>
                             <t t-if="appointment.state == 'valid'">
+                                <small class="text-muted">Estado - </small><span t-field="appointment.name"/>
                                 <span class="badge badge-pill badge-info">Confirmada</span>
                             </t>
                         </span>
