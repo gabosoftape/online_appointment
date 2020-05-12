@@ -44,11 +44,11 @@ class OnlineAppointment(http.Controller):
 
     def prepare_values(self, form_data=False, default_appointee_id=False, criteria='default'):
 
-        appointee_ids = self.select_appointees(criteria=criteria)
-        options = self.select_options(criteria=criteria)
+        #appointee_ids = self.select_appointees(criteria=criteria)
+        #options = self.select_options(criteria=criteria)
 
         values = {
-            'appointees': request.env['res.users'].sudo().search([('id', 'in', appointee_ids)]),
+            'appointees': [],
             'timeslots': [],
             'appointee_id': 0,
             'appointment_option_id': 0,
