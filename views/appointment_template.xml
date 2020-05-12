@@ -19,35 +19,7 @@
                                            <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
                                        </div>
                                    </div>
-                                   <t t-if="mode == 'registered'">
-                                       <div class="form-group col-xl-6">
-                                           <div>
-                                               <input type="hidden" class="form-control" readonly="True" name="name" t-att-value="name"/>
-                                               <input type="hidden" class="form-control" name="email" readonly="True" t-att-value="email"/>
-                                               <input type="hidden" class="form-control" name="phone" readonly="True" t-att-value="phone"/>
-                                           </div>
-                                       </div>
-                                   </t>
-                                   <t t-else="">
-                                       <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
-                                           <label class="control-label" for="name">Nombre completo</label>
-                                           <div>
-                                               <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name" required="True" />
-                                           </div>
-                                       </div>
-                                       <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-xl-6">
-                                           <label class="control-label" for="email">Correo electronico</label>
-                                           <div>
-                                               <input type="text" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="email" required="True" />
-                                           </div>
-                                       </div>
-                                       <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-xl-6">
-                                           <label class="control-label" for="phone">Telefono</label>
-                                           <div>
-                                               <input type="text" name="phone" t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="phone" required="True" />
-                                           </div>
-                                       </div>
-                                   </t>
+
                                    <!--<div class="form-group col-xl-6"></div>
                                    <div class="form-group col-xl-6">
                                        <label class="control-label" for="appointment_option">Tipo</label>
@@ -96,26 +68,54 @@
                                            </select>
                                        </div>
                                    </div> -->
-                                   <div class="form-group col-lg-12">
+                                   <div class="form-group col-lg-4">
                                        <label class="control-label" for="remarks">Antecedente Enfermedades</label>
                                        <div>
                                            <textarea class="form-control" cols="60" name="antecedentes" rows="6"></textarea>
                                        </div>
                                    </div>
-                                   <div class="form-group col-lg-12">
+                                   <div class="form-group col-lg-4">
                                        <label class="control-label" for="remarks">Antecedente procedimientos quirurgicos</label>
                                        <div>
                                            <textarea class="form-control" cols="60" name="procedimientos" rows="6"></textarea>
                                        </div>
                                    </div>
-                                   <div class="form-group col-lg-12">
+                                   <div class="form-group col-lg-4">
                                        <label class="control-label" for="remarks">Descripcion de los sintomas</label>
                                        <div>
                                            <textarea class="form-control" cols="60" name="remarks" rows="6"><t t-esc="remarks"/></textarea>
                                        </div>
                                    </div>
-
-                                   <div class="form-group col-lg-12">
+                                    <t t-if="mode == 'registered'">
+                                       <div class="form-group col-xl-12">
+                                           <div>
+                                               <input type="hidden" class="form-control" readonly="True" name="name" t-att-value="name"/>
+                                               <input type="hidden" class="form-control" name="email" readonly="True" t-att-value="email"/>
+                                               <input type="hidden" class="form-control" name="phone" readonly="True" t-att-value="phone"/>
+                                           </div>
+                                       </div>
+                                   </t>
+                                   <t t-else="">
+                                       <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-lg-6">
+                                           <label class="control-label" for="name">Nombre completo</label>
+                                           <div>
+                                               <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name" required="True" />
+                                           </div>
+                                       </div>
+                                       <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-xl-6">
+                                           <label class="control-label" for="email">Correo electronico</label>
+                                           <div>
+                                               <input type="text" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="email" required="True" />
+                                           </div>
+                                       </div>
+                                       <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-xl-6">
+                                           <label class="control-label" for="phone">Telefono</label>
+                                           <div>
+                                               <input type="text" name="phone" t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="phone" required="True" />
+                                           </div>
+                                       </div>
+                                   </t>
+                                   <div class="form-group col-lg-12 text-center">
                                        <div>
                                            <button class="btn btn-success">Continuar agendamiento</button>
                                        </div>

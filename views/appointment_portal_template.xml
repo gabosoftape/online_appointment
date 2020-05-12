@@ -104,29 +104,29 @@
                         <section style="display: flex; justify-content: center;">
                              <div style="width: 300px;">
                                 <div style="border-radius:25px; background-color: #ffffff; box-shadow: 10px 20px 37px -21px rgba(0,0,0,0.75); margin-top:2rem; margin-bottom:2rem;">
-                                    <div style="background-color:#0064ff; color: #ffffff; border-radius: 25px 25px 15px 15px;">
+                                    <div style="background-color:#0064ff; color: #ffffff; border-radius: 25px 25px 15px 15px;" class="text-center">
                                       <div style="padding-left:2rem; padding-right:2rem; padding-top:1rem; padding-bottom:1rem;">
                                         <span style="text-align: center; font-size: 20px;">Solicita tu consulta<br/></span>
                                         <span style="text-align: center;">Como te gustaria ser atendido?</span>
                                       </div>
                                     </div>
-                                    <div style="padding-left: 20px; padding-right:20px; padding-bottom:2rem;">
+                                    <div style="padding-left: 20px; padding-right:20px; padding-bottom:1rem; padding-top:1rem;">
                                         <div class=" text-center mt-2 mb-2">
                                             <a href="/online-appointment" class="btn btn-primary"><i class="fa fa-file-video-o"></i> Videoconsulta</a>
+                                            <a href="#" class="btn btn-primary" style="text-decoration: none; color: #00d2ff; background-color: #003ca0; margin-left: 10px;"><i class="fa fa-file-video-o"></i> Domicilio</a>
                                         </div>
-                                      <div class="text-center mt-2 mb-2">
-                                          <a href="#" class="btn btn-primary" style="text-decoration: none; color: #00d2ff; background-color: #003ca0;"><i class="fa fa-file-video-o"></i> Domicilio</a>
-                                      </div>
                                     </div>
                                   </div>
                              </div>
                         </section>
                         <section>
-                            <div class="o_portal_my_details" style="align-content: flex-end;">
-                                <h4>Mi informacion <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/>Editar</a></h4>
+                            <div class="o_portal_my_details">
+                                <div class="text-center">
+                                    <h4>Mi informacion <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/>Editar</a></h4>
+                                </div>
                                 <hr class="mt-1 mb-0"/>
-                                <div t-field="user_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;email&quot;, &quot;phone&quot;, &quot;address&quot;, &quot;name&quot;]}"/>
-                              </div>
+                                <div t-field="user_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;email&quot;, &quot;phone&quot;, &quot;name&quot;]}" style="display: flex; justify-content: center;"/>
+                            </div>
                         </section>
                     </div>
                 </div>
