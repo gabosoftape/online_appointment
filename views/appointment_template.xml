@@ -71,19 +71,19 @@
                                    <div class="form-group col-lg-4">
                                        <label class="control-label" for="remarks">Antecedente Enfermedades</label>
                                        <div>
-                                           <textarea class="form-control" cols="60" name="antecedentes" rows="6"></textarea>
+                                           <textarea class="form-control" cols="40" name="antecedentes" rows="6"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group col-lg-4">
                                        <label class="control-label" for="remarks">Antecedente procedimientos quirurgicos</label>
                                        <div>
-                                           <textarea class="form-control" cols="60" name="procedimientos" rows="6"></textarea>
+                                           <textarea class="form-control" cols="40" name="procedimientos" rows="6"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group col-lg-4">
                                        <label class="control-label" for="remarks">Descripcion de los sintomas</label>
                                        <div>
-                                           <textarea class="form-control" cols="60" name="remarks" rows="6"><t t-esc="remarks"/></textarea>
+                                           <textarea class="form-control" cols="40" name="remarks" rows="6"><t t-esc="remarks"/></textarea>
                                        </div>
                                    </div>
                                     <t t-if="mode == 'registered'">
