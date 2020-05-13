@@ -170,7 +170,7 @@
                         <div class="col-6">
                             <h6><b>Asistentes</b></h6>
                             <t t-if="appointment.sudo().partner_id.id == request.env.user.partner_id.id">
-                                <div t-if="appointment.appointee_id" class="col-12 col-md-6">
+                                <div t-if="appointment.appointee_id" class="col-12">
                                     <h6>Doctor Asignado</h6>
                                     <div class="row">
                                          <div class="col flex-grow-0 pr-3">
@@ -182,7 +182,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div t-if="appointment.partner_id" class="col-12 col-md-6 mb-2 mb-md-0">
+                                <div t-if="appointment.partner_id" class="col-12 mb-2 mb-md-0">
                                     <h6>Tú</h6>
                                     <div class="row">
                                        <div class="col flex-grow-0 pr-3">
