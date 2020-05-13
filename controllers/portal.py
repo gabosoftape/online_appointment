@@ -71,10 +71,11 @@ class CustomerPortal(CustomerPortal):
         # content according to pager and archive selected
         appointments = request.env['s2u.appointment.registration'].search([('state', '=', 'valid'),('partner_id', '=', request.env.user.partner_id.id)], order=order, limit=self._items_per_page, offset=pager['offset'])
         request.session['my_appointments_history'] = appointments.ids[:100]
-
+        fechaappointment = date_begin.strftime('%b/%d/%Y')
+        hora = date_begin.strftime('%X')
         values.update({
-            'date': date_begin.strftime('%Y-%m-%d'),
-            'date_end': date_begin.strftime('%H:%M'),
+            'date': fechaappointment,
+            'date_end': hora,
             'appointments': appointments,
             'page_name': 'appointment',
             'archive_groups': archive_groups,
