@@ -60,11 +60,11 @@
 
                             <t t-set="breadcrumbs_searchbar" t-value="True"/>
                             <t t-call="portal.portal_searchbar">
-                                <t t-set="title">Citas</t>
+                                <t t-set="title" >Citas</t>
                             </t>
                             <t t-if="not appointments">
-                                <div class="alert alert-warning mt8" role="alert">
-                                    Las citas estan siendo preparadas, una vez se registre el pago se habilitara tu cita, con el doctor asignado
+                                <div class="alert mt8" role="alert" style="background-color: #dcffff; ">
+                                    <p style="color:#003ca0;">Aun no tienes citas asignadas, animate y solicita tu consulta.</p>
                                 </div>
                             </t>
                             <t t-if="appointments" t-call="portal.portal_table">
