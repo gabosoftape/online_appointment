@@ -94,6 +94,9 @@
                                         <td t-if="appointment.state == 'valid'">
                                             <span class="badge badge-pill badge-info">Confirmada</span>
                                         </td>
+                                        <td>
+                                            <a t-attf-href="/my/online-appointment/#{appointment.id}?{{ keep_query() }}">Ver cita</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </t>
