@@ -221,10 +221,10 @@
                     </div>
                     <div class="row mt8" id="online_appointment_interaction">
                         <div t-if="appointment.state in ['pending', 'valid']" class="col-lg-6 pt16 pb16">
-                            <button class="btn btn-info" id="cancel_appointment_button">Cancel appointment</button>
+                            <button class="btn btn-info" id="cancel_appointment_button">Postponer Cita</button>
                         </div>
                         <div t-if="appointment.state in ['pending'] and appointment.sudo().appointee_id.id == request.env.user.partner_id.id" class="col-lg-6 pt16 pb16">
-                            <button class="btn btn-info" id="confirm_appointment_button">Confirm appointment</button>
+                            <button class="btn btn-info" id="confirm_appointment_button">Ir a cita</button>
                         </div>
                     </div>
                 </t>
