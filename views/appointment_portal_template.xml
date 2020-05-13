@@ -64,7 +64,7 @@
                             </t>
                             <t t-if="not appointments">
                                 <div class="alert mt8" style="background-color:#dcffff;" role="alert">
-                                    <p style="color:#003ca0;">Aun no tienes citas asignadas, animate y solicita tu consulta.</p>
+                                    <p style="color:#003ca0;">Aún no tienes citas asignadas, anímate y solicita tu consulta.</p>
                                 </div>
                             </t>
                             <t t-if="appointments" t-call="portal.portal_table">
