@@ -77,7 +77,7 @@
                                             Doctor: <span t-field="appointment.sudo().appointee_id.name" />
                                         </td>
                                         <td t-else="">
-                                            N/A
+                                            <p style="font-size:12px;">Ningun doctor asignado</p>
                                         </td>
                                         <td class="text-right">
                                             <span t-field="appointment.appointment_begin" />
