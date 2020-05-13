@@ -73,8 +73,8 @@ class CustomerPortal(CustomerPortal):
         request.session['my_appointments_history'] = appointments.ids[:100]
 
         values.update({
-            'date': date_begin,
-            'date_end': date_end,
+            'date': date_begin.strftime('%Y-%m-%d'),
+            'date_end': date_begin.strftime('%H:%M'),
             'appointments': appointments,
             'page_name': 'appointment',
             'archive_groups': archive_groups,
