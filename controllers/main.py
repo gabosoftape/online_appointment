@@ -18,7 +18,7 @@ class OnlineAppointment(http.Controller):
 
     def ld_to_utc(self, ld, appointee_id, duration=False):
 
-        date_parsed = datetime.datetime.strptime(ld, "%Y-%m-%d  %H:%M")
+        date_parsed = datetime.datetime.strptime(ld, "%b %d %Y %H:%M %p")
         if duration:
             date_parsed += datetime.timedelta(hours=duration)
 
@@ -82,7 +82,7 @@ class OnlineAppointment(http.Controller):
                 timeslot_id = 0
 
             try:
-                appointment_date = datetime.datetime.strptime(form_data['appointment_date'], '%d/%m/%Y').strftime('%d/%m/%Y')
+                appointment_date = datetime.datetime.strptime(form_data['appointment_date'], '%b %d %Y %H:%M %p').strftime('%b %d %Y %H:%M %p')
             except:
                 appointment_date = ''
 
