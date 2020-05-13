@@ -80,10 +80,10 @@
                                             <p style="font-size:12px;">Doctor por asignar</p>
                                         </td>
                                         <td class="text-right">
-                                            <span t-field="appointment.appointment_begin"/>
+                                            <span t-field="appointment.appointment_begin.strftime('%Y-%m-%d')"/>
                                         </td>
                                         <td class="text-right">
-                                            <span t-field="appointment.appointment_end"/>
+                                            <span t-field="appointment.appointment_end.strftime('%H:%M')"/>
                                         </td>
                                         <td t-if="appointment.state == 'cancel'">
                                             <span class="badge badge-pill badge-info">Cancelada</span>
