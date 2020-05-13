@@ -80,7 +80,7 @@
                                             <p style="font-size:12px;">Doctor por asignar</p>
                                         </td>
                                         <td class="text-right">
-                                            Fecha y hora: <span t-field="appointment.appointment_begin"/>
+                                            Fecha y hora: <span t-field="appointment.appointment_begin" t-field-options='{"format": "d MMMM y"}'/>
                                         </td>
                                         <td t-if="appointment.state == 'cancel'">
                                             <span class="badge badge-pill badge-info">Cancelada</span>
