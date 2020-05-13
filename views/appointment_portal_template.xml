@@ -74,10 +74,10 @@
                                             <span t-field="appointment.name"/>
                                         </td>
                                         <td t-if="appointment.appointee_id">
-                                            Doctor: <span t-field="appointment.sudo().appointee_id.name"/>
+                                            Dr. <span t-field="appointment.sudo().appointee_id.name"/>
                                         </td>
                                         <td t-else="">
-                                            <p style="font-size:12px;">Ningun doctor asignado</p>
+                                            <p style="font-size:12px;">Doctor por asignar</p>
                                         </td>
                                         <td class="text-right">
                                             <span t-field="appointment.appointment_begin"/>
