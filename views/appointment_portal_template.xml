@@ -39,7 +39,7 @@
                                       <h2 class="o_default_snippet_text">Busca un servicio</h2>
                                       <p class="o_default_snippet_text">¡Tenemos servicios asombrosos en MEDCO, conózcalos ahora!</p>
                                       <form method="get" class="o_wsale_products_searchbar_form s_wsale_products_searchbar_input mb-3" action="/shop">
-                                        <div role="search" class="input-group">
+                                        <div role="search" class="input-group" style="padding-right:30%;">
                                           <input type="text" name="search" class="search-query form-control oe_search_box" placeholder="Buscar..." data-limit="5" data-display-description="true" data-display-price="true" data-display-image="true" autocomplete="off"/>
                                           <div class="input-group-append">
                                             <button type="submit" class="btn btn-primary oe_search_button" aria-label="Búsqueda" title="Búsqueda">
