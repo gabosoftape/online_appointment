@@ -24,17 +24,17 @@
 
     <template id="portal_my_appointments" name="Panel">
         <t t-call="portal.portal_layout">
-            <div id="header">
+           <div id="header">
 
             </div>
             <div id="body">
                 <div class="row">
                     <div id="content" class="col-lg-8">
-                        <section class="s_wsale_products_searchbar bg-200 pt24 pb24" data-name="Products Search">
+                        <section class="pt24 pb24 bblanco" data-name="Products Search">
                             <div class="container">
                               <div class="row">
                                 <div class="col-lg-12">
-                                  <div class="card">
+                                  <div class="card sinborde" >
                                     <div class="card-body">
                                       <h2 class="o_default_snippet_text">Busca un servicio</h2>
                                       <p class="o_default_snippet_text">¡Tenemos servicios asombrosos en MEDCO, conózcalos ahora!</p>
@@ -60,11 +60,11 @@
 
                             <t t-set="breadcrumbs_searchbar" t-value="True"/>
                             <t t-call="portal.portal_searchbar">
-                                <t t-set="title" >Citas</t>
+                                <t t-set="title">Citas</t>
                             </t>
                             <t t-if="not appointments">
-                                <div class="alert mt8" role="alert" style="background-color: #dcffff; ">
-                                    <p style="color:#003ca0;">Aun no tienes citas asignadas, animate y solicita tu consulta.</p>
+                                <div class="alert mt8" style="background-color:#dcffff;" role="alert">
+                                    <p style="color:#003ca0;">Las citas estan siendo preparadas, una vez se registre el pago se habilitara tu cita, con el doctor asignado</p>
                                 </div>
                             </t>
                             <t t-if="appointments" t-call="portal.portal_table">
@@ -74,16 +74,16 @@
                                             <span t-field="appointment.name"/>
                                         </td>
                                         <td t-if="appointment.appointee_id">
-                                            Doctor: <span t-field="appointment.sudo().appointee_id.name" />
+                                            Doctor: <span t-field="appointment.sudo().appointee_id.name"/>
                                         </td>
                                         <td t-else="">
                                             <p style="font-size:12px;">Ningun doctor asignado</p>
                                         </td>
                                         <td class="text-right">
-                                            <span t-field="appointment.appointment_begin" />
+                                            <span t-field="appointment.appointment_begin"/>
                                         </td>
                                         <td class="text-right">
-                                            <span t-field="appointment.appointment_end" />
+                                            <span t-field="appointment.appointment_end"/>
                                         </td>
                                         <td t-if="appointment.state == 'cancel'">
                                             <span class="badge badge-pill badge-info">Cancelada</span>
@@ -115,8 +115,8 @@
                                     </div>
                                     <div style="padding-left: 20px; padding-right:20px; padding-bottom:1rem; padding-top:1rem;">
                                         <div class=" text-center mt-2 mb-2">
-                                            <a href="/online-appointment" class="btn btn-primary"><i class="fa fa-file-video-o"></i> Videoconsulta</a>
-                                            <a href="#" class="btn btn-primary" style="text-decoration: none; color: #00d2ff; background-color: #003ca0; margin-left: 10px;"><i class="fa fa-file-video-o"></i> Domicilio</a>
+                                            <a href="/online-appointment" class="btn btn-primary"><i class="fa fa-file-video-o"/> Videoconsulta</a>
+                                            <a href="#" class="btn btn-primary" style="text-decoration: none; color: #00d2ff; background-color: #003ca0; margin-left: 10px;"><i class="fa fa-file-video-o"/> Domicilio</a>
                                         </div>
                                     </div>
                                   </div>
