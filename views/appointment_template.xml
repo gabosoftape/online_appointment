@@ -203,14 +203,10 @@
                             <div class="col-12">
                                 <div class="alert alert-success">
                                      <button type="button" class="close" data-dismiss="alert">&amp;times;</button>
-                                     <h2>ya falta solo un paso mas!</h2>
-                                     <t t-if="appointment">
-                                         <p>Tu cita se creo normal, sin embargo falta algo mas importante .. pagar</p>
-                                     </t>
-                                     <t t-else="">
-                                        <p>Tu cita se creo normal, sin embargo falta pagar</p>
-                                     </t>
-                                     <p>Pagar ahora!</p>
+                                     <h2>Tu consulta fue solicitada!</h2>
+                                     <p>Sin embargo debes realizar tu pago antes de ser atendido</p>
+
+
                                 </div>
                             </div>
                             <div class="col-12">

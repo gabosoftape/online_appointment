@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+
+		<template id="sh_website_category_page_assets_frontend" inherit_id="website.assets_frontend" name="Website Category Page Assets">
+  			<xpath expr="link[last()]" position="after">   
+    			<link rel="stylesheet" type="text/css" href="/s2u_online_appointment/static/src/css/sh_website_category_page.css"/>
+     			<link rel="stylesheet" type="text/css" href="/s2u_online_appointment/static/src/css/sh_website_category.css"/>
+   			</xpath>
+		</template>
+
+		<template id="sh_website_category_page_description" inherit_id="website_sale.products" customize_show="True" name="Category Description">
+			<xpath expr="//div[hasclass('products_pager')]" position="after">
+
+				<section t-if="not website.category_header_style" id="no_category_style">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-3"/>
+							<div class="col-md-9">
+								<strong>
+									<span t-if="category" t-field="category.name" /><br/>
+									<span t-if="category" t-field="category.description" />
+								</strong> 
+							</div>
+						</div>
+					</div>				
+				</section>
+
+				<!--category_dec-with-img-style-1-->
+				 <section t-if="website.category_header_style and website.category_header_style=='style1'" id="sh_category_dec">
+					<div class="container">
+						<div class="row">
+						
+							<div t-if="category" class="sub_category">
+								<div t-if="category.image_1920" class="col-lg-4 col-md-4  col-sm-4 col-12">
+									<div class="sh_category_inner">
+										<div class="sh_category_img">
+											<img t-if="category.image_1920" t-attf-src="data:image/gif;base64, #{category.image_1920}" alt="category.name"/>
+										</div>
+									</div>
+								</div>
+								<div t-if="category.image_1920" class="col-lg-8 col-md-8  col-sm-8 col-xs-12">
+									<div class="sh_category_detail">					
+										<h4 class="sh_category_title">
+											<span t-if="category.name" t-field="category.name" />
+										</h4>
+										<p class="desc" t-if="category.description" t-field="category.description"/>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</section> 
+				<!--category_dec-with-img-style-1-->
+				
+				<!--category_dec-without-img-style-2-->
+				<section t-if="website.category_header_style and website.category_header_style=='style2'" id="sh_category_dec">
+					<div class="container">
+						<div class="row">
+							<div t-if="category" class="sub_category">			
+								<div t-if="category.name" class="col-lg-12 col-md-12  col-sm-12 col-12">
+									<div class="sh_category_detail">					
+										<h4 class="sh_category_title">
+											<span t-if="category.name" t-field="category.name"/>
+										</h4>
+										<p class="desc" t-if="category.description" t-field="category.description"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section> 
+				<!--category_dec-without-img-style-2-->
+
+				<!--category_dec-background-img-style-3-->
+				<section t-if="website.category_header_style and website.category_header_style=='style3'" id="sh_content"> 
+					<div class="container">
+						<div class="row">
+						    <ul class="caption-style">
+						    	<li> 
+						        	<a href="#" class="container-profile-dark">
+						          		<div class="inner-content">
+						             		<img t-if="category.image_1920" t-attf-src="data:image/gif;base64, #{category.image_1920}" alt="category.name"/>
+						             		<div class="caption-bg">
+						             		</div>
+						            		<h2><span t-if="category" t-field="category.name"/></h2>
+						           			<p class="desc" t-if="category" t-field="category.description"/>
+						          		</div>
+						        	</a>
+						      	</li>   
+						  	</ul>
+						</div>
+					</div>
+				</section>
+				<!--category_dec-background-img-style-3-->
+				
+			</xpath>
+		</template>
+        
+        <record id="website_shopby_category" model="ir.ui.view">
+            <field name="name">Shop By Category</field>
+            <field name="type">qweb</field>
+            <field name="key">website.shopby_category</field>
+            <field name="arch" type="xml">
+                <t name="Shop By Category" t-name="website.shopby_category">
+                	<t t-call="website.layout">
+                  		<div id="wrap">
+				
+							<section t-if="not website.category_style" id="no_page_style">
+								<div class="container">
+								  	<div class="row">
+		              				    <t t-set="product_category" t-value="request.env['product.public.category'].sudo().search([('show_category','=',True)],order ='sequence asc')" />                        
+								  	
+									 	<t t-if="product_category">
+									 		<t t-foreach="product_category" t-as="rec">
+										 		<div t-if="rec.image_1920" class="col-lg-6 col-md-6 col-sm-6 col-12" >
+										 			<div>
+												 		<a t-att-href="'/shop/category/%s' % (rec.id)">
+															<figure>
+																<img t-if="rec.image_1920" t-attf-src="data:image/gif;base64, #{rec.image_1920}" alt="rec.name"/>
+																<figcaption>
+																	<h2><span t-if="rec.name" t-field="rec.name"/></h2>
+																	<p> <span t-if="rec.description" t-field="rec.description"/></p>
+																</figcaption>			
+															</figure>
+														</a>
+													</div>
+												</div>
+											</t>
+										</t>
+									</div>
+								</div>
+							</section>	
+						
+							<!--sh_category-->
+							<section t-if="website.category_style and website.category_style=='style1'" id="sh_category">
+								<div class="container">
+								  	<div class="row">
+									 	<div class="sh_sub_category">
+										 	<t t-set="product_category" t-value="request.env['product.public.category'].sudo().search([('show_category','=',True),('image_1920','!=',False)],order ='sequence asc')" />
+									 	
+										 	<t t-if="product_category" >
+											 	<t t-foreach="product_category" t-as="rec">
+											 		<a t-att-href="'/shop/category/%s' % (rec.id)">	
+											 		<div class="sh_img_box">                       
+												 		<div t-if="rec.image_1920" class="col-lg-6 col-md-12 col-sm-12 col-12">
+															<figure class="sh_effect">
+																<div class="img_class">
+																	<img t-if="rec.image_1920" t-attf-src="data:image/gif;base64, #{rec.image_1920}" height="400" alt="rec.name"/>
+																</div>	
+																<figcaption>
+																	<h2 t-if="rec.name" t-field="rec.name"/>
+																	<span t-if="rec.description" t-field="rec.description"/>
+																</figcaption>			
+															</figure>
+														</div>
+														</div>
+													</a>	
+												</t>	
+											</t>					
+										</div>
+									</div>
+								</div>
+							</section>	 
+							<!--sh_category-->
+												
+							<!--sh_compan-->
+							<section  t-if="website.category_style and website.category_style=='style2'" id="sh_company">
+							    <div class="container">
+							        <div class="row">
+							   	       <t t-set="product_category" t-value="request.env['product.public.category'].sudo().search([('show_category','=',True)],order ='sequence asc')" />                                
+							            <div t-if="product_category" class="sub_company">
+								 			<t t-foreach="product_category" t-as="rec">           
+								               <div class="main_box">
+								               <div class="img_box">
+								               	    <div t-if="rec.image_1920" class="col-lg-3 col-md-6 col-sm-6 col-6">
+								                        <div class="img_box_inner">
+													 		<a t-att-href="'/shop/category/%s' % (rec.id)">	                        
+									                           <div class="comp_img">
+							  								   		<img t-if="rec.image_1920" t-attf-src="data:image/gif;base64, #{rec.image_1920}" alt="rec.name"/>
+									                           </div>
+									                           <div class="comp_content">
+									                           		<h4 class="title"><span t-if="rec.name" t-field="rec.name"/></h4>
+									                           		<div class="comp_dec">
+									                              		<p t-if="rec.description" t-field="rec.description"/>							                              
+								                              	    </div>                              
+									                           	</div>
+								                           	</a>
+								                        </div>
+								                    </div>
+								                    </div>
+								                </div>                
+											</t>                
+							            </div>
+							        </div>
+							    </div>
+							</section>
+							<!--sh_compan-->
+							
+							<!--shop_category_1-->
+							<section t-if="website.category_style and website.category_style=='style3'"  id="shop_category_1">
+								<div class="container">
+									<div class="row">	
+							   	        <t t-set="product_category" t-value="request.env['product.public.category'].sudo().search([('show_category','=',True)],order ='sequence asc')" />                        		
+							 		    <t t-if="product_category" t-foreach="product_category" t-as="rec">	
+											<div t-if="rec.image_1920" class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+												<a t-att-href="'/shop/category/%s' % (rec.id)">
+													<div class="shop_cate">
+														<div class="img_box">
+															<img t-if="rec.image_1920" t-attf-src="data:image/gif;base64, #{rec.image_1920}" alt="rec.name"/>
+														</div>
+														<div class="sh_text">
+															<h4><span t-if="rec.name" t-field="rec.name"/></h4>
+														</div>
+														<div class="cate_menu">
+															<div class="menu_title">
+																<span t-if="rec.name" t-field="rec.name"/>
+															</div>
+															<p class="site_cate" t-if="rec.description" t-field="rec.description" />
+														</div>
+													</div>
+												</a>
+											</div>
+									    </t>	
+									</div>
+								</div>
+							</section>
+							<!--shop_category_1-->
+
+                  		</div>
+                	</t>
+                </t>
+            </field>
+        </record>
+        
+	</data>
+</odoo>		

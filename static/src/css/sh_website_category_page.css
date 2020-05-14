@@ -1,0 +1,59 @@
+/*--------------------
+sh_category_dec
+--------------------*/
+#sh_category_dec{float: left;width: 100%;position: relative;}
+#sh_category_dec .sub_category{float: left;width: 100%;position: relative;border-top: 1px solid gray;border-bottom:  1px solid gray;padding:20px 15px 15px;margin-bottom: 50px}
+#sh_category_dec .sh_category_detail .sh_category_title{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 30px;position: relative;margin: 0 0 24px;padding-bottom: 26px;text-transform: uppercase;letter-spacing: 2px}
+#sh_category_dec .sh_category_detail{padding-left: 15px}
+#sh_category_dec .sh_category_detail .sh_category_title:after { position: absolute;bottom: 0;left: 0;width: 60px;height: 1px;display: inline-block;content: '';background-color:#3498DB;}
+#sh_category_dec .sh_category_detail  .desc{font-size: 16px;line-height: 28px;color: #72797e;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+#sh_category_dec .sh_category_img img{width: 100%;height: 250px;object-fit: cover;}
+#sh_category_dec .sh_category_img{margin-bottom: 20px;}
+/*--BACKGROUND-IMG-PART--*/
+#sh_category_dec .sub_category_back{float: left;width: 100%;position: relative;border-top: 1px solid gray;border-bottom:  1px solid gray;margin-bottom: 50px;background: url(/home/softhealer/Pictures/laptop-mock-up-lateral-view_1310-199.jpg);background-position: center;background-size:cover;background-repeat: no-repeat;height: auto;}
+#sh_category_dec .sub_category_back .sh_overly_box{float: left; width: 100%; position: relative;background: #020101b3;}
+#sh_category_dec .sub_category_back .sh_overly_box .sh_category_title{color: #FFF;}
+#sh_category_dec .sub_category_back .sh_overly_box .sh_category_detail{padding: 20PX;}
+#sh_category_dec .sub_category_back .sh_overly_box .sh_category_detail p{color: rgba(255, 255, 255);}
+/*--BACKGROUND-IMG-PART--*/
+/*--------------------
+sh_category_dec
+--------------------*/
+
+/*------------------
+sh_content
+------------------*/
+#sh_content {z-index: 5;margin: 0 auto;float:left;width: 100%;position: relative; 	}
+#sh_content .container-profile-dark {display: inline-block;margin-top:9em;text-decoration: none;text-align: center;transition: all 0.3s ease-in-out;}
+#sh_content .container-profile-dark h2 {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 30px;margin-top: 9.5em; padding-bottom: 5px;text-transform: uppercase;letter-spacing: 2px;color: #333;}
+#sh_content .container-profile-dark p {font-size: 16px;line-height: 28px;color: #72797e;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;text-align: justify;}
+#sh_content .caption-style {list-style-type: none;padding: 0px;width: 100%;margin: 0 auto;justify-content: center;
+    display: flex;border-top: 1px solid gray;border-bottom: 1px solid gray;padding: 20px 15px 15px;margin-bottom: 50px;}
+#sh_content .caption-style li {display: block;}
+#sh_content .container-profile-dark .inner-content {padding: 0px;position: relative;overflow: hidden; margin-top: -8em;}
+#sh_content .caption-text {z-index: 10;color: #fff;position: absolute;width: 250px;height: 250px;top: 80px;}
+#sh_content .container-profile-dark .caption-bg {opacity: 0; cursor: pointer;position: absolute;left: calc(50% - 140px);background-color: rgba(215, 81, 107, .7);z-index: 100;width: 250px;height: 250px;border: 10px solid #EBEBEB;-webkit-border-radius: 100%;-moz-border-radius: 100%; transition: all 0.3s ease-in-out;}
+#sh_content .container-profile-dark img {padding: 0px; position: absolute;left: calc(50% - 140px);z-index: 10; width: 250px; height: 250px; border-radius: 50%;border: 10px solid #EBEBEB;-webkit-border-radius: 50-moz-border-radius: 50%;margin: 0 0 1em;}
+#sh_content .container-profile-dark h4{text-transform: uppercase;font-size: 24px;margin-bottom: 0;display: inline-block;font-weight: 300;}
+/* Image hover */
+/* Media queries*/
+@media only screen and (min-width: 768px) {
+#sh_content .caption-style li{display: inline-block;}
+#sh_content .container-profile-dark img,
+#sh_content .container-profile-dark .caption-bg,
+#sh_content .caption-text {width: 200px;height: 200px;left: calc(50% - 100px);object-fit: cover;}
+#sh_content .caption-text {top: 40px;}
+#sh_content .container-profile-dark h2{margin-top: 7.5em}
+}
+@media only screen and (min-width: 992px){
+#sh_content .container-profile-dark img,
+#sh_content .container-profile-dark .caption-bg,
+#sh_content .caption-text {width: 230px;height: 230px;left: calc(50% - 120px);object-fit: cover;}
+#sh_content .caption-text {top: 70px;}
+#sh_content .container-profile-dark h2{margin-top: 8.5em}
+}
+@media only screen and (min-width: 1200px){
+#sh_content .caption-style {width: 1100px;}}
+/*------------------
+sh_content
+------------------*/

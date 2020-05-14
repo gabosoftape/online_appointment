@@ -32,7 +32,9 @@
     'depends': [
         'calendar',
         'website',
-        'portal'
+        'portal',
+        'website',
+        'website_sale'
     ],
     'data': [
         'security/appointments_security.xml',
@@ -42,10 +44,13 @@
         'views/appointment_doctor_view.xml',
         'views/appointment_option_view.xml',
         'views/appointment_registration_view.xml',
+        'views/website_config_settings.xml',
+        'views/website_product_category.xml',
+        'views/website_shopby_category.xml',
+        'data/website_category_menu.xml',
         'security/ir.model.access.csv'
     ],
-    'qweb': [
-    ],
+
     'installable': True,
     'auto_install': False,
 }
